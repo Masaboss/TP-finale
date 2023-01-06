@@ -1,3 +1,6 @@
+#BERTHRAND MASABO MASB14079806
+
+
 # TP-finale
 
 Le but de ce travail final est de démontrer comment les modèles de régression linéaire et logistique peuvent être utilisés pour prédire l'évolution des actions cotées en bourse
