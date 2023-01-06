@@ -10,7 +10,7 @@ Les actions cotées en bourse sont des titres financiers qui représentent des p
 ## Premiere Etape 
  
  
- Il faut creer un fonction qui nous permet d'extraire les donnees du site Yahoo Finance a l'aide de la fonction 'getSybmbols()' de la librairie 'quantmod' 
+ Il faut creer un fonction qui nous permet d'extraire les donnees du site Yahoo Finance a l'aide de la fonction `getSybmbols()` de la librairie `quantmod` 
   cette fontion doit prendre une date de debut et une date de fin et le symbol de l'action voulu 
  
  Voici le code que vous pouvez copier coller: 
