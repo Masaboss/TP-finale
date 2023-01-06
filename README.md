@@ -20,17 +20,22 @@ Voici le code complet:
 `install.packages("quantmod)`
 
 `library(quantmod)`  
+Code          | Description 
+------------- | -------------
+dataFinaExtract <- function(date_debut, date_fin, NomIndice)  | Creation de la fonction dataFinaExtract
+{data = getSymbols(NomIndice, src = "yahoo", from = date_debut, to = date_fin, auto.assign = FALSE)colnames(data) = c("Open", "High", "Low", "Close","Volume","Adj Close")| Cette parti du code a comme but de prendre d'extraire directemnt l'action de Yahoo fincae et d'attribuer des tritres au collones 
 
+Voici le code complet:
 
 dataFinaExtract <- function(date_debut, date_fin, NomIndice) {
-  
-  
+
   data = getSymbols(NomIndice, src = "yahoo", from = date_debut, to = date_fin, auto.assign = FALSE)
   
   colnames(data) = c("Open", "High", "Low", "Close","Volume","Adj Close")
   
   return(data)
 }
+
 Voici les options disponibles pour la fonction `dataFinaExtract()`:
 
 - `date_debut`: Date de début de la période d'extraction des données, au format "YYYY-MM-DD".
@@ -49,4 +54,24 @@ Suite à l'extraction des données, nous avons constaté que nous disposons de p
 
 `feature engeneering`
 L'objectif du feature engineering est de sélectionner les caractéristiques qui sont les plus pertinentes pour prédire la variable cible, tout en évitant de sélectionner des caractéristiques qui sont redondantes ou qui ne sont pas corrélées à la variable cible. Le feature engineering peut également inclure la création de nouvelles caractéristiques à partir de celles qui existent déjà, par exemple en effectuant des opérations mathématiques ou en utilisant des techniques de transformation de données.Un feature engineering réussi peut entraîner une augmentation significative de la précision des modèles, tandis qu'un feature engineering inadéquat peut entraîner une baisse de la qualité des modèles Voila donc l'importace critique de cette etape. 
+
+Voici la liste des caractéristiques que nous allons ajouter:
+ 
+ 
+ * listes
+     * prix d'ouverture de la journee presente 
+     * prix d'ouverture de la journee precedente
+     * prix de fermeture de la journee precedente 
+     * prix du high de la journee precedente 
+     * pris du low de la journee precedente 
+     * prix du volume de la journee precedente 
+     * prix de fermeture moyen pour (5,30,365 dernier jour) retourne 3 nouvelles caracteristiques
+     * prix de volume moyen pour (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+     * Rendement quotidien
+     * Les Ratios de fermeture moyen *detaillez pus bas*   retourne 3 nouvelles caracteristiques
+     * Les ecart-types pour les prix de fermeture (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+     * Les ecart-types pour les volume (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+     * Les rendment moyen par semaine, par mois et par annee   retourne 3 nouvelles caracteristiques
+
+Nous avons 25 nouvelles caracteristiques!
 
