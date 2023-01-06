@@ -41,4 +41,4 @@ Nous allons travaillez tout au long de ce projet avec l'action S&P 500 qui debut
 
 ### Optimisation de la prevision des actions en integrant des nouvelles caracteristiques 
 
-
+Suite à l'extraction des données, nous avons constaté que nous disposons de peu de variables pour effectuer des prévisions. Pour remédier à cela, nous allons utiliser la technique de feature engineering afin de créer de nouvelles caractéristiques qui nous permettront d'améliorer la qualité de nos prévisions.
