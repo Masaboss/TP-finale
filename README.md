@@ -1,4 +1,4 @@
-#BERTHRAND MASABO MASB14079806
+# BERTHRAND MASABO MASB14079806
 
 
 # TP-finale
@@ -66,7 +66,7 @@ Voici la liste des caractéristiques que nous allons ajouter:
      * prix d'ouverture de la journee precedente
      * prix de fermeture de la journee precedente 
      * prix du high de la journee precedente 
-     * pris du low de la journee precedente 
+     * prix du low de la journee precedente 
      * prix du volume de la journee precedente 
      * prix de fermeture moyen pour (5,30,365 dernier jour) retourne 3 nouvelles caracteristiques
      * prix de volume moyen pour (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
@@ -78,3 +78,92 @@ Voici la liste des caractéristiques que nous allons ajouter:
 
 Nous avons 25 nouvelles caracteristiques!
 
+
+Code  | Description
+------------- | -------------
+feature_engin <- function(data)| Debut de la fonction (nom de la focntion et doit retourne data puisque cest data qu'on utilise comme reference 
+data$Open_today <- data$Open  |  prix d'ouverture de la journee presente 
+data$Open_yesterday <- c(NA, data$Open[-length(data$Open)])| prix d'ouverture de la journee precedente
+data$Close_yesterday <- c(NA, data$Close[-length(data$Close)])  | prix de fermeture de la journee precedente
+data$High_yesterday <- c(NA, data$High[-length(data$High)]) | prix du High de la journee precedente 
+data$Low_yesterday <- c(NA, data$Low[-length(data$Low)]) | prix du Low de la journee precedente 
+data$Volume_yesterday <- c(NA, data$Volume[-length(data$Volume)]) | prix du volume de la journee precedente 
+data$Close_average_5 <- SMA(data$Close, n = 5)
+data$Close_average_30 <- SMA(data$Close, n = 30)
+data$Close_average_365 <- SMA(data$Close, n = 365)  | prix de fermeture moyen pour (5,30,365 dernier jour) retourne 3 nouvelles caracteristique
+data$volume_average_5 <- SMA(data$Volume, n = 5)
+data$volume_average_30 <- SMA(data$Volume, n = 30)
+data$volume_average_365 <- SMA(data$Volume, n = 365)  | prix de volume moyen pour (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+data$Quotidien <- (data$Close - data$Close_yesterday) / data$Close_yesterday 
+data$Quotidien<- data$Quotidien(100)|Rendement quotidien
+data$Ratio_jou5_sur_30 <- data$Close_average_5 /  data$Close_average_30
+data$Ratio_jou5_sur_365 <-  data$Close_average_5 / data$Close_average_365
+data$Ratio_jou30_sur_365 <- data$Close_average_30 / data$Close_average_365 |Les Ratios de fermeture moyen *detaillez pus bas*   retourne 3 nouvelles caracteristiques
+data$Close_sd_5 <- rollapply(data$Close, width = 5, sd, align = "right")
+data$Close_sd_30 <- rollapply(data$Close, width = 30, sd, align = "right")
+data$Close_sd_365 <- rollapply(data$Close, width = 365, sd, align = "right")| Les ecart-types pour les prix de fermeture (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+data$Volume_sd_5 <- rollapply(data$Volume, width = 5, sd, align = "right")
+data$Volume_sd_30 <- rollapply(data$Volume, width = 30, sd, align = "right")
+data$Volume_sd_365 <- rollapply(data$Volume, width = 365, sd, align = "right") | Les ecart-types pour les volume (5,30,365 dernier jour )  retourne 3 nouvelles caracteristiques
+data$Moyenne_Rendement_semaine <- SMA(data$Quotidien, n = 5)
+data$Moyenne_Rendement_Mensuelle<- SMA(data$Quotidien,n=30)
+data$Moyenne_Rendement_Annuelle<-SMA(data$Quotidien,n=365)  | Les rendment moyen par semaine, par mois et par annee   retourne 3 nouvelles caracteristiques
+
+return(data)}| fin de la fonction (nous retourne les valeurs voulu)
+
+
+Voici le code complet:
+feature_engin <- function(data) {
+
+  data$Open_today <- data$Open
+  
+  
+  data$Open_yesterday <- c(NA, data$Open[-length(data$Open)])
+  
+ 
+  data$Close_yesterday <- c(NA, data$Close[-length(data$Close)])
+ 
+  
+  data$High_yesterday <- c(NA, data$High[-length(data$High)])
+  
+ 
+  data$Low_yesterday <- c(NA, data$Low[-length(data$Low)])
+  
+ 
+  data$Volume_yesterday <- c(NA, data$Volume[-length(data$Volume)])
+  
+  
+  data$Close_average_5 <- SMA(data$Close, n = 5)
+  data$Close_average_30 <- SMA(data$Close, n = 30)
+  data$Close_average_365 <- SMA(data$Close, n = 365)
+  
+  data$volume_average_5 <- SMA(data$Volume, n = 5)
+  data$volume_average_30 <- SMA(data$Volume, n = 30)
+  data$volume_average_365 <- SMA(data$Volume, n = 365)
+  
+  
+  data$Quotidien <- (data$Close - data$Close_yesterday) / data$Close_yesterday 
+  data$Quotidien<- data$Quotidien*100
+  
+ 
+  data$Ratio_jou5_sur_30 <- data$Close_average_5 /  data$Close_average_30
+  data$Ratio_jou5_sur_365 <-  data$Close_average_5 / data$Close_average_365
+  data$Ratio_jou30_sur_365 <- data$Close_average_30 / data$Close_average_365
+  
+ 
+  data$Close_sd_5 <- rollapply(data$Close, width = 5, sd, align = "right")
+  data$Close_sd_30 <- rollapply(data$Close, width = 30, sd, align = "right")
+  data$Close_sd_365 <- rollapply(data$Close, width = 365, sd, align = "right")
+
+ 
+  data$Volume_sd_5 <- rollapply(data$Volume, width = 5, sd, align = "right")
+  data$Volume_sd_30 <- rollapply(data$Volume, width = 30, sd, align = "right")
+  data$Volume_sd_365 <- rollapply(data$Volume, width = 365, sd, align = "right")
+  
+
+  data$Moyenne_Rendement_semaine <- SMA(data$Quotidien, n = 5)
+  data$Moyenne_Rendement_Mensuelle<- SMA(data$Quotidien,n=30)
+  data$Moyenne_Rendement_Annuelle<-SMA(data$Quotidien,n=365)
+  
+      return(data)
+}
