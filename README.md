@@ -112,7 +112,7 @@ data$Moyenne_Rendement_Annuelle<-SMA(data$Quotidien,n=365)  | Les rendment moyen
 return(data)}| fin de la fonction (nous retourne les valeurs voulu)
 
 
-Voici le code complet:
+#### Voici le code complet:
 feature_engin <- function(data) {
 
   data$Open_today <- data$Open
@@ -167,3 +167,5 @@ feature_engin <- function(data) {
   
       return(data)
 }
+
+### Modelisation pour pouvoir predire les donne dont nous avons receuillis 
