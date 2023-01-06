@@ -31,7 +31,11 @@ dataFinaExtract <- function(date_debut, date_fin, NomIndice) {
   
   return(data)
 }
+Voici les options disponibles pour la fonction `dataFinaExtract()`:
 
+- `date_debut`: Date de début de la période d'extraction des données, au format "YYYY-MM-DD".
+- `date_fin`: Date de fin de la période d'extraction des données, au format "YYYY-MM-DD".
+- `NomIndice`: Nom de l'indice à extraire, sous la forme d'un symbole de bourse (par exemple, "^GSPC" pour l'indice S&P 500).
 Vous pouvez vous referez a ce lien  pour meiux comprendre le package quantmod https://www.youtube.com/watch?v=bDXeRofJFTE
 
 data <- dataFinaExtract("2020-01-01", "2022-01-31", "^GSPC")
@@ -42,3 +46,7 @@ Nous allons travaillez tout au long de ce projet avec l'action S&P 500 qui debut
 ### Optimisation de la prevision des actions en integrant des nouvelles caracteristiques 
 
 Suite à l'extraction des données, nous avons constaté que nous disposons de peu de variables pour effectuer des prévisions. Pour remédier à cela, nous allons utiliser la technique de feature engineering afin de créer de nouvelles caractéristiques qui nous permettront d'améliorer la qualité de nos prévisions.
+
+`feature engeneering`
+L'objectif du feature engineering est de sélectionner les caractéristiques qui sont les plus pertinentes pour prédire la variable cible, tout en évitant de sélectionner des caractéristiques qui sont redondantes ou qui ne sont pas corrélées à la variable cible. Le feature engineering peut également inclure la création de nouvelles caractéristiques à partir de celles qui existent déjà, par exemple en effectuant des opérations mathématiques ou en utilisant des techniques de transformation de données.Un feature engineering réussi peut entraîner une augmentation significative de la précision des modèles, tandis qu'un feature engineering inadéquat peut entraîner une baisse de la qualité des modèles Voila donc l'importace critique de cette etape. 
+
