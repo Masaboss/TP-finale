@@ -167,5 +167,3 @@ feature_engin <- function(data) {
   
       return(data)
 }
-
-### Modelisation pour pouvoir predire les donne dont nous avons receuillis 
